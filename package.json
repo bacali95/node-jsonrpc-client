@@ -1,18 +1,38 @@
 {
-  "name": "tiny-jsonrpc-client",
-  "version": "1.1.0",
+  "name": "node-jsonrpc-client",
+  "version": "1.0.0",
   "description": "A lightweight JSON-RPC 2.0 client",
   "main": "index.js",
   "keywords": [
     "jsonrpc"
   ],
-  "author": "Martin Naumann <naumann@archilogic.com>",
+  "author": "Nasreddine Bac Ali <nasreddine.bacali95@gmail.com>",
+  "repository": "https://github.com/bacali95/node-jsonrpc-client",
   "license": "ISC",
-  "dependencies": {
-    "bluebird": "^3.1.1",
-    "request": "^2.67.0",
-    "request-promise": "^1.0.2",
-    "uuid": "^2.0.1"
+  "scripts": {
+    "build": "npm-run-all lint format tsc",
+    "tsc": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "node test/test.js",
+    "prepublishOnly": "npm-run-all build test"
   },
-  "devDependencies": {}
+  "dependencies": {
+    "form-data": "3.0.0",
+    "request": "2.88.0",
+    "request-promise": "4.2.5",
+    "uuid": "3.3.3"
+  },
+  "devDependencies": {
+    "@types/form-data": "2.5.0",
+    "@types/request": "2.47.0",
+    "@types/request-promise": "4.1.41",
+    "@types/uuid": "3.4.3",
+    "http-jsonrpc-server": "1.1.0",
+    "tslint-config-prettier": "1.18.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "1.19.1",
+    "tslint": "5.20.1",
+    "typescript": "3.7.3"
+  }
 }
