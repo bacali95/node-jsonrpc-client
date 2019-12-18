@@ -13,12 +13,12 @@ npm install --save node-jsonrpc-client
 ### Simple usage
 
 ```javascript
-var jsonRpc = require("node-jsonrpc-client");
+const JsonRpc = require("node-jsonrpc-client");
 
 // Our API server is at http://example.org/api
-jsonRpc.setUrl("http://example.org/api");
+const client = new JsonRpc("http://example.org/api");
 // Let's call the 'saySomething' method that takes two parameters, 'to' and 'message'
-jsonRpc.call("saySomething", { to: "Alice", message: "Hi, Bob!" }).then(
+client.call("saySomething", { to: "Alice", message: "Hi, Bob!" }).then(
   function success(result) {
     // The 'saySomething' method has a field 'output'
     console.log("output", result.output);
@@ -26,7 +26,6 @@ jsonRpc.call("saySomething", { to: "Alice", message: "Hi, Bob!" }).then(
   function failure(err) {
     // oops, something went wrong!
     console.error("Oops! Error code " + err.code + ": " + err.message);
-    // additional data might be in 'err.data'
   }
 );
 ```
@@ -36,25 +35,24 @@ jsonRpc.call("saySomething", { to: "Alice", message: "Hi, Bob!" }).then(
 If the API is using a cookie to keep track of the session, you can use `setUseCookies(true)`:
 
 ```javascript
-var jsonRpc = require("node-jsonrpc-client");
+const JsonRpc = require("node-jsonrpc-client");
 
-var SessionCookie = null; // store session cookie for later
+let SessionCookie = null; // store session cookie for later
 
 // Our API server is at http://example.org/api
-jsonRpc.setUrl("http://example.org/api");
-// Let's call the 'saySomething' method that takes two parameters, 'to' and 'message'
-jsonRpc.call("login", { username: "alice", password: "monkey" }).then(
+const client = new JsonRpc("http://example.org/api");
+// Let's call the 'login' method that takes two parameters, 'username' and 'password'
+client.call("login", { username: "alice", password: "monkey" }).then(
   function success(loginResult) {
     // The 'getMessages' method has a field 'messages' and requires the cookie from login
-    jsonRpc.call("getMessages", {}).then(function(msgResult) {
+    client.call("getMessages", {}).then((msgResult) => {
       console.log("Messages: ", result.messages);
     });
-    SessionCookie = jsonRpc.getCookie(); // gets our session cookie for later use (see below)
+    SessionCookie = client.getCookie(); // gets our session cookie for later use (see below)
   },
   function failure(err) {
     // oops, something went wrong!
     console.error("Oops! Error code " + err.code + ": " + err.message);
-    // additional data might be in 'err.data'
   }
 );
 ```
@@ -62,15 +60,15 @@ jsonRpc.call("login", { username: "alice", password: "monkey" }).then(
 You can also get hold of the cookie using `getCookie` and `setCookie` to set a cookie
 
 ```javascript
-var jsonRpc = require("node-jsonrpc-client");
+const JsonRpc = require("node-jsonrpc-client");
 
 // Our API server is at http://example.org/api
-jsonRpc.setUrl("http://example.org/api");
+const client = new JsonRpc("http://example.org/api");
 
-jsonRpc.setCookie(SessionCookie); // the cookie from the example above, holding our session information
+client.setCookie(SessionCookie); // the cookie from the example above, holding our session information
 
 // Let's call the 'getMessages' method again without a login but using the cookie
-jsonRpc.call("getMessages", {}).then(
+client.call("getMessages", {}).then(
   function success(result) {
     // The 'getMessages' method has a field 'messages' and requires the cookie from login
     console.log("Messages: ", result.messages);
@@ -78,7 +76,6 @@ jsonRpc.call("getMessages", {}).then(
   function failure(err) {
     // oops, something went wrong!
     console.error("Oops! Error code " + err.code + ": " + err.message);
-    // additional data might be in 'err.data'
   }
 );
 ```
