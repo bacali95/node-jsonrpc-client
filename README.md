@@ -1,4 +1,4 @@
-# node-jsonrpc-client
+# node-jsonrpc-client [![npm version](https://badge.fury.io/js/node-jsonrpc-client.svg)](https://badge.fury.io/js/node-jsonrpc-client)
 
 A really, really simple JSON-RPC 2.0 client.
 
