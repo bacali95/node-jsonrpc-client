@@ -15,13 +15,16 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "test": "node test/test.js",
-    "prepublishOnly": "npm-run-all build test"
+    "prepublishOnly": "npm-run-all build test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "form-data": "3.0.0",
     "request": "2.88.0",
     "request-promise": "4.2.5",
-    "uuid": "3.3.3"
+    "uuid": "3.3.3",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/form-data": "2.5.0",
@@ -34,5 +37,6 @@
     "prettier": "1.19.1",
     "tslint": "5.20.1",
     "typescript": "3.7.3"
-  }
+  },
+  "snyk": true
 }
