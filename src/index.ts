@@ -13,7 +13,7 @@ class JsonRpcError implements Error {
   }
 }
 
-class JsonRcp {
+class JsonRpc {
   cookieJar: CookieJar = Request.jar();
 
   constructor(private url: string, private useCookies: boolean = false) {}
@@ -74,4 +74,4 @@ class JsonRcp {
   }
 }
 
-export = JsonRcp;
+export = JsonRpc;
