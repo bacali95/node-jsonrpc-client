@@ -19,9 +19,9 @@ const client = new JsonRpc('http://127.0.0.1:9090');
 server.setMethod('sum', sum);
 server.listen(9090, '127.0.0.1').then(() => {
   console.log('server is listening at http://127.0.0.1:9090');
-  client.call('sum', [5, 6, 7])
+  client
+    .call('sum', [5, 6, 7])
     .then(console.log)
     .catch(console.log)
     .finally(() => server.close());
 });
-

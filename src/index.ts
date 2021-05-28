@@ -7,7 +7,7 @@ class JsonRpcError implements Error {
   message: string;
   stack: string | undefined;
 
-  constructor(message: string, code: number) {
+  constructor(message: string, public code: number) {
     this.message = message || 'Server returned an error response';
     this.stack = new Error().stack;
   }
@@ -64,10 +64,10 @@ class JsonRpc {
           params: params,
         },
       })
-        .then(response => {
+        .then((response) => {
           resolve(response);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(new JsonRpcError(err.message, err.statusCode));
         });
     });
